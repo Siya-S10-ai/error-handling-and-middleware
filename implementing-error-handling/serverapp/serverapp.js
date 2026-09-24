@@ -17,6 +17,19 @@ app.get('/squarenumber/:num', async (req, res, next) => {
     res.json({'square':x*x});
 });
 
+// GET endpoint
+app.get('/cubenumber/:num', async (req, res, next) => {
+    let x = req.params.num;
+    if (isNaN(x)) {
+        const err = new Error('Invalid input');
+        err.statusCode = 400; // Bad Request
+        err.details = 'The input must be a number.';
+        next(err); // Pass the error to the next middleware
+    } else {
+        res.json({ "cube": x * x * x });
+    }
+});
+
 app.use((err, req, res, next) => {
     // Set fefault values for status code and status if not provided in the error object
     err.statusCode = err.statusCode || 500;
