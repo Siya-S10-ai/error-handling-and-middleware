@@ -11,6 +11,9 @@ app.get('/', (req, res) => {
 // GET enpoint
 app.get('/squarenumber/:num', async (req, res) => {
     let x = req.params.num;
+    if (isNaN(x)) {
+        throw Error("Input is not a number");
+    }
     res.json({'square':x*x});
 });
 
